@@ -1,12 +1,16 @@
 "use client";
 import React from "react";
+import Link from "next/link";
+import Image from "next/image";
 
 //** MUI */
 import { Box } from "@mui/material";
 
 //** Styles */
 import { HeaderStyles } from "./styles";
-import Image from "next/image";
+
+//** Configs */
+import { DEFAULT_PAGE } from "@/configs/router/page";
 
 //** Interfaces */
 interface HeaderComponentProps {
@@ -31,7 +35,9 @@ export default function HeaderComponent({
                 }),
             }}
         >
-            <Image src="/next.svg" alt="logo" width={200} height={30} />
+            <Link href={DEFAULT_PAGE}>
+                <Image src="/next.svg" alt="logo" width={200} height={30} />
+            </Link>
         </Box>
     );
 }

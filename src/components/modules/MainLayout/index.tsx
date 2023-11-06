@@ -38,10 +38,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
                 handleNavBar={handleNavBar}
             />
             <Box sx={{ width: "100%" }}>
-                <Box
-                    component={"main"}
-                    sx={{ minHeight: "120vh", flexGrow: 1 }}
-                >
+                <Box component={"main"} sx={{ minHeight: "90vh", flexGrow: 1 }}>
                     <Box sx={{ height: "78px" }} />
                     {children}
                 </Box>

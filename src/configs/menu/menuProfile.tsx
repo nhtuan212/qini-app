@@ -1,15 +1,18 @@
 import React from "react";
-import { signOut } from "next-auth/react";
+// import { signOut } from "next-auth/react";
 
 //** MUI */
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import InfoIcon from "@mui/icons-material/Info";
 
+//** Configs */
+import { PAGE } from "../router/page";
+
 export const menuProfile = [
     {
-        onClick: () => {},
-        content: "Profile",
+        url: PAGE.EXAMPLE,
+        label: "Profile",
         icon: (
             <AccountCircleIcon
                 fontSize="small"
@@ -19,8 +22,8 @@ export const menuProfile = [
         ),
     },
     {
-        onClick: () => {},
-        content: "Info",
+        // url: PAGE.PROFILE,
+        label: "Info",
         icon: (
             <InfoIcon
                 fontSize="small"
@@ -30,8 +33,8 @@ export const menuProfile = [
         ),
     },
     {
-        onClick: () => signOut(),
-        content: "Logout",
+        // url: PAGE.LOG,
+        label: "Logout",
         icon: (
             <LogoutIcon
                 fontSize="small"
