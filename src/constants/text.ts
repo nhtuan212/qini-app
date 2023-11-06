@@ -1,3 +1,10 @@
+export const TEXT = {
+    MENU: {
+        EXAMPLE: "Example",
+        REPORT: "Báo cáo cuối ngày",
+    },
+};
+
 export const BUTTON = {
     TITLE: "Button",
     SUBMIT: "Submit",

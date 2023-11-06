@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 
 //** MUI */
@@ -16,11 +15,11 @@ import {
     ListItemText,
     Theme,
 } from "@mui/material";
-import { ChevronLeft, ChevronRight, Inbox, Mail } from "@mui/icons-material";
+import { ChevronLeft, Menu } from "@mui/icons-material";
 
 //** Configs */
 import { DEFAULT_PAGE } from "@/configs/router/page";
-import { menuProfile } from "@/configs/menu/menuProfile";
+import { pagesRouter } from "@/configs/router";
 
 //** Lodash */
 import { isEmpty } from "lodash";
@@ -46,6 +45,9 @@ export default function NavBarComponent({
 }: NavBarComponentProps) {
     //** Custom Hooks */
     const router = useRouterCustomHook();
+
+    //** Variables */
+    const { pageRouters } = pagesRouter();
 
     //** Functions */
     const openedMixin = (): CSSObject => ({
@@ -76,63 +78,73 @@ export default function NavBarComponent({
                 }),
             }}
         >
-            <Box
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "78px",
-                }}
-            >
-                <Link href={DEFAULT_PAGE}>
-                    <Image src="/next.svg" alt="logo" width={200} height={30} />
-                </Link>
+            <Box sx={NavBarStyles.Toggle}>
+                {open && (
+                    <Link href={DEFAULT_PAGE}>
+                        QiNi
+                        {/* <Typography>QiNi</Typography> */}
+                    </Link>
+                )}
+                <IconButton
+                    onClick={handleNavBar}
+                    sx={{ ...(open && { ...NavBarStyles.Toggle.Active }) }}
+                >
+                    {open ? <ChevronLeft /> : <Menu />}
+                </IconButton>
             </Box>
-            <IconButton onClick={handleNavBar} sx={NavBarStyles.Toggle}>
-                {open ? <ChevronLeft /> : <ChevronRight />}
-            </IconButton>
-            {!isEmpty(menuProfile) && (
-                <List>
-                    {menuProfile.map((item, index) => (
-                        <ListItem
-                            key={item?.label}
-                            disablePadding
-                            onClick={() => {
-                                item?.url && router.push(item?.url);
-                            }}
-                            sx={{
-                                //** Active URL */
-                                ...(router.pathName === item?.url && {
-                                    ...NavBarStyles.Active,
-                                }),
-                            }}
-                        >
-                            <ListItemButton
+            {!isEmpty(pageRouters) && (
+                <List
+                    sx={{
+                        p: 0,
+                    }}
+                >
+                    {pageRouters.map(item => {
+                        const { url, label, icon } = item;
+                        return (
+                            <ListItem
+                                key={label}
+                                disablePadding
+                                onClick={() => {
+                                    url && router.push(url);
+                                }}
                                 sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? "initial" : "center",
-                                    px: 2.5,
+                                    //** Active URL */
+                                    ...(router.pathName === url && {
+                                        ...NavBarStyles.Active,
+                                    }),
                                 }}
                             >
-                                <ListItemIcon
+                                <ListItemButton
                                     sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : "auto",
-                                        justifyContent: "center",
+                                        minHeight: 48,
+                                        justifyContent: open
+                                            ? "initial"
+                                            : "center",
+                                        px: 2.5,
                                     }}
                                 >
-                                    {index % 2 === 0 ? <Inbox /> : <Mail />}
-                                </ListItemIcon>
-                                <ListItemText
-                                    primary={item?.label}
-                                    sx={{
-                                        opacity: open ? 1 : 0,
-                                        whiteSpace: "nowrap",
-                                    }}
-                                />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
+                                    {icon && (
+                                        <ListItemIcon
+                                            sx={{
+                                                minWidth: 0,
+                                                mr: open ? 3 : "auto",
+                                                justifyContent: "center",
+                                            }}
+                                        >
+                                            {icon}
+                                        </ListItemIcon>
+                                    )}
+                                    <ListItemText
+                                        primary={label}
+                                        sx={{
+                                            opacity: open ? 1 : 0,
+                                            whiteSpace: "nowrap",
+                                        }}
+                                    />
+                                </ListItemButton>
+                            </ListItem>
+                        );
+                    })}
                 </List>
             )}
         </Drawer>

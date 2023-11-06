@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 //** Components */
-import HeaderComponent from "@commonComponents/Header";
+// import HeaderComponent from "@commonComponents/Header";
 import FooterComponent from "@commonComponents/Footer";
 import NavBarComponent from "@commonComponents/NavBar";
 
@@ -28,10 +28,10 @@ export default function MainLayout({ children }: MainLayoutProps) {
 
     return (
         <Box sx={{ display: "flex" }}>
-            <HeaderComponent
+            {/* <HeaderComponent
                 isNavBarOpen={isNavBarOpen}
                 navBarWidth={navBarWidth}
-            />
+            /> */}
             <NavBarComponent
                 open={isNavBarOpen}
                 navBarWidth={navBarWidth}
@@ -39,7 +39,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
             />
             <Box sx={{ width: "100%" }}>
                 <Box component={"main"} sx={{ minHeight: "90vh", flexGrow: 1 }}>
-                    <Box sx={{ height: "78px" }} />
+                    {/* <Box sx={{ height: "78px" }} /> */}
                     {children}
                 </Box>
                 <FooterComponent />
