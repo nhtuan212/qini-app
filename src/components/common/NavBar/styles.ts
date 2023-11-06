@@ -1,9 +1,11 @@
 //** MUI */
 import { colors } from "@/themes/color";
 
-export const DrawerStyles = {
-    transition: "all .5s",
-    overflow: "unset",
+export const NavBarStyles = {
+    Drawer: {
+        transition: "all .5s",
+        overflow: "unset",
+    },
 
     Toggle: {
         position: "absolute",
@@ -15,6 +17,15 @@ export const DrawerStyles = {
 
         "&:hover": {
             backgroundColor: colors.white,
+        },
+    },
+
+    Active: {
+        background: colors.primary,
+        color: colors.white,
+
+        svg: {
+            color: colors.white,
         },
     },
 };

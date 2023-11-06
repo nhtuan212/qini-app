@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 //** MUI */
 import {
@@ -17,11 +18,19 @@ import {
 } from "@mui/material";
 import { ChevronLeft, ChevronRight, Inbox, Mail } from "@mui/icons-material";
 
+//** Configs */
+import { DEFAULT_PAGE } from "@/configs/router/page";
+import { menuProfile } from "@/configs/menu/menuProfile";
+
+//** Lodash */
+import { isEmpty } from "lodash";
+
 //** Styles */
-import { DrawerStyles } from "./styles";
+import { NavBarStyles } from "./styles";
 
 //** Themes */
 import { theme } from "@/themes/globalThemes";
+import { useRouterCustomHook } from "@/customHooks";
 
 //** Interfaces */
 interface NavBarComponentProps {
@@ -35,14 +44,17 @@ export default function NavBarComponent({
     navBarWidth,
     handleNavBar,
 }: NavBarComponentProps) {
+    //** Custom Hooks */
+    const router = useRouterCustomHook();
+
     //** Functions */
     const openedMixin = (): CSSObject => ({
-        ...DrawerStyles,
+        ...NavBarStyles.Drawer,
         width: navBarWidth,
     });
 
     const closedMixin = (theme: Theme): CSSObject => ({
-        ...DrawerStyles,
+        ...NavBarStyles.Drawer,
         width: `calc(${theme.spacing(7)} + 1px)`,
         [theme.breakpoints.up("sm")]: {
             width: `calc(${theme.spacing(8)} + 1px)`,
@@ -72,20 +84,27 @@ export default function NavBarComponent({
                     height: "78px",
                 }}
             >
-                <Image src="/next.svg" alt="logo" width={200} height={30} />
+                <Link href={DEFAULT_PAGE}>
+                    <Image src="/next.svg" alt="logo" width={200} height={30} />
+                </Link>
             </Box>
-            <IconButton onClick={handleNavBar} sx={DrawerStyles.Toggle}>
+            <IconButton onClick={handleNavBar} sx={NavBarStyles.Toggle}>
                 {open ? <ChevronLeft /> : <ChevronRight />}
             </IconButton>
-            <List>
-                {["Inbox", "Starred", "Send email", "Drafts"].map(
-                    (text, index) => (
+            {!isEmpty(menuProfile) && (
+                <List>
+                    {menuProfile.map((item, index) => (
                         <ListItem
-                            key={text}
+                            key={item?.label}
                             disablePadding
-                            sx={{ display: "block" }}
                             onClick={() => {
-                                // router.push(url);
+                                item?.url && router.push(item?.url);
+                            }}
+                            sx={{
+                                //** Active URL */
+                                ...(router.pathName === item?.url && {
+                                    ...NavBarStyles.Active,
+                                }),
                             }}
                         >
                             <ListItemButton
@@ -105,7 +124,7 @@ export default function NavBarComponent({
                                     {index % 2 === 0 ? <Inbox /> : <Mail />}
                                 </ListItemIcon>
                                 <ListItemText
-                                    primary={text}
+                                    primary={item?.label}
                                     sx={{
                                         opacity: open ? 1 : 0,
                                         whiteSpace: "nowrap",
@@ -113,9 +132,9 @@ export default function NavBarComponent({
                                 />
                             </ListItemButton>
                         </ListItem>
-                    ),
-                )}
-            </List>
+                    ))}
+                </List>
+            )}
         </Drawer>
     );
 }

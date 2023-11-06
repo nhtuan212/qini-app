@@ -1,6 +1,6 @@
 export const PAGE = {
-    dashboard: "/dashboard",
-    example: "/example",
+    DASHBOARD: "/dashboard",
+    EXAMPLE: "/example",
 };
 
-export const DEFAULT_PAGE = PAGE.example;
+export const DEFAULT_PAGE = PAGE.DASHBOARD;
