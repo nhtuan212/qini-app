@@ -17,8 +17,4 @@ export const theme = createTheme({
             contrastText: "#47008F",
         },
     },
-    typography: {
-        fontFamily: ["monospace", "Roboto"].join(","),
-        fontSize: 13,
-    },
 });

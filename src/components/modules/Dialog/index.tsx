@@ -6,7 +6,7 @@ import ButtonComponent from "@commonComponents/Button";
 import DialogComponent from "@commonComponents/Dialog";
 
 //** Constants */
-import { BUTTON, DIALOG } from "@/constants/text";
+import { BUTTON, TEXT } from "@/constants/text";
 
 //** Type Props */
 import { ButtonColor } from "@typeProps/buttonTypeProps";
@@ -35,11 +35,10 @@ export default function DialogModule() {
             />
             <DialogComponent
                 open={isDialogOpen}
-                // fullScreen
                 size={DialogSize.sm}
                 onClose={handleDialogClose}
-                title={DIALOG.TITLE}
-                content={DIALOG.CONTENT}
+                title={TEXT.DIALOG.TITLE}
+                content={TEXT.DIALOG.CONTENT}
                 closeIcon
                 action={
                     <>
