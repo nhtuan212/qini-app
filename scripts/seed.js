@@ -1,0 +1,4 @@
+CREATE TABLE invoices
+CREATE TABLE customers
+CREATE TABLE user
+CREATE TABLE revenue

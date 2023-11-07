@@ -10,7 +10,8 @@
         "prettier": "prettier --write \"**/*.{ts,tsx,json,scss}\"",
         "eslint": "eslint --quiet \"src/**/*.{ts,tsx,json}\"",
         "lint-staged": "lint-staged",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "seed": "node -r dotenv/config ./scripts/seed.js"
     },
     "lint-staged": {
         "src/**/*.{ts,tsx,json,scss}": [
@@ -24,6 +25,8 @@
         "@emotion/styled": "^11.11.0",
         "@mui/icons-material": "^5.14.16",
         "@mui/material": "^5.14.16",
+        "@vercel/postgres": "^0.5.1",
+        "bcrypt": "^5.1.1",
         "next": "14.0.1",
         "react": "^18",
         "react-dom": "^18",
@@ -36,6 +39,7 @@
         "@types/react-dom": "^18",
         "@typescript-eslint/eslint-plugin": "^6.9.1",
         "@typescript-eslint/parser": "^6.9.1",
+        "dotenv": "^16.3.1",
         "eslint": "^8",
         "eslint-config-next": "14.0.1",
         "eslint-plugin-json": "^3.1.0",
