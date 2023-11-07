@@ -1,6 +1,9 @@
 "use client";
 import React from "react";
 
+//** Store */
+import { useBearStore } from "@/store/useBearStore";
+
 //** Components */
 import ButtonComponent from "@commonComponents/Button";
 
@@ -15,12 +18,16 @@ import {
 } from "@typeProps/buttonTypeProps";
 
 export default function ButtonModule() {
+    //** Store */
+    const increase = useBearStore(state => state.increase);
+    const bears = useBearStore(state => state.bears);
+
     return (
         <>
             <ButtonComponent
                 startIcon={<Delete />}
-                onClick={() => {}}
-                value="Button"
+                onClick={() => increase(1)}
+                value={`Button (${bears})`}
             />
             <ButtonComponent
                 sx={{ mx: 1 }}
