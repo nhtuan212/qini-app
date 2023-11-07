@@ -12,6 +12,11 @@ export const pagesRouter = () => {
     return {
         pageRouters: [
             {
+                url: PAGE.STAFF,
+                label: TEXT.STAFF_NAME,
+                icon: <AssignmentInd />,
+            },
+            {
                 url: PAGE.REPORT,
                 label: TEXT.MENU.REPORT,
                 icon: <Assessment />,
@@ -21,11 +26,6 @@ export const pagesRouter = () => {
                 label: TEXT.MENU.EXAMPLE,
                 icon: <AssignmentInd />,
             },
-            // {
-            //     url: PAGE.EXAMPLE,
-            //     label: TEXT.MENU.EXAMPLE,
-            //     icon: <Backup />,
-            // },
             // {
             //     url: PAGE.EXAMPLE,
             //     label: TEXT.MENU.EXAMPLE,

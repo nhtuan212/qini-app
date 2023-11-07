@@ -1,19 +1,23 @@
-import React, { DialogHTMLAttributes } from "react";
+"use client";
+import React from "react";
 import {
     Dialog,
     DialogActions,
     DialogContent,
     DialogContentText,
+    DialogProps,
     DialogTitle,
 } from "@mui/material";
 import { Close } from "@mui/icons-material";
 
 import { DialogSize } from "@/constants/typeProps/dialogTypeProps";
 
-interface DialogProps extends DialogHTMLAttributes<HTMLDialogElement> {
-    open: boolean;
-    fullScreen?: boolean;
+// interface DialogProps extends DialogHTMLAttributes<HTMLDialogElement> {
+interface DialogComponentProps extends Omit<DialogProps, "content"> {
+    // open: boolean;
+    // fullScreen?: boolean;
     size?: DialogSize;
+    content?: React.ReactNode;
     closeIcon?: React.ReactNode;
     action?: React.ReactNode;
     onClose?: () => {} | void;
@@ -22,17 +26,19 @@ interface DialogProps extends DialogHTMLAttributes<HTMLDialogElement> {
 const DialogComponent = ({
     open,
     fullScreen,
+    fullWidth = true,
     size = DialogSize.md,
     title,
     content,
     closeIcon,
     action,
     onClose,
-}: DialogProps) => {
+}: DialogComponentProps) => {
     return (
         <Dialog
             open={open}
             fullScreen={fullScreen}
+            fullWidth={fullWidth}
             maxWidth={size}
             keepMounted
             onClose={onClose}
@@ -53,7 +59,11 @@ const DialogComponent = ({
             )}
             {content && (
                 <DialogContent dividers>
-                    <DialogContentText>{content}</DialogContentText>
+                    {typeof content === "string" ? (
+                        <DialogContentText>{content}</DialogContentText>
+                    ) : (
+                        content
+                    )}
                 </DialogContent>
             )}
             {action && <DialogActions>{action}</DialogActions>}

@@ -14,6 +14,7 @@ import {
     ListItemIcon,
     ListItemText,
     Theme,
+    Tooltip,
 } from "@mui/material";
 import { ChevronLeft, Menu } from "@mui/icons-material";
 
@@ -79,12 +80,7 @@ export default function NavBarComponent({
             }}
         >
             <Box sx={NavBarStyles.Toggle}>
-                {open && (
-                    <Link href={DEFAULT_PAGE}>
-                        QiNi
-                        {/* <Typography>QiNi</Typography> */}
-                    </Link>
-                )}
+                {open && <Link href={DEFAULT_PAGE}>QiNi</Link>}
                 <IconButton
                     onClick={handleNavBar}
                     sx={{ ...(open && { ...NavBarStyles.Toggle.Active }) }}
@@ -124,15 +120,21 @@ export default function NavBarComponent({
                                     }}
                                 >
                                     {icon && (
-                                        <ListItemIcon
-                                            sx={{
-                                                minWidth: 0,
-                                                mr: open ? 3 : "auto",
-                                                justifyContent: "center",
-                                            }}
+                                        <Tooltip
+                                            title={label}
+                                            arrow
+                                            placement="right-start"
                                         >
-                                            {icon}
-                                        </ListItemIcon>
+                                            <ListItemIcon
+                                                sx={{
+                                                    minWidth: 0,
+                                                    mr: open ? 3 : "auto",
+                                                    justifyContent: "center",
+                                                }}
+                                            >
+                                                {icon}
+                                            </ListItemIcon>
+                                        </Tooltip>
                                     )}
                                     <ListItemText
                                         primary={label}
