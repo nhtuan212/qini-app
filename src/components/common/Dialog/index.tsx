@@ -53,7 +53,7 @@ const DialogComponent = ({
                 >
                     {title}
                     {closeIcon && (
-                        <Close className="cursor-pointer" onClick={onClose} />
+                        <Close sx={{ cursor: "pointer" }} onClick={onClose} />
                     )}
                 </DialogTitle>
             )}
